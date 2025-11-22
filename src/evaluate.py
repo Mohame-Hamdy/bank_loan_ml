@@ -1,5 +1,4 @@
-# EVALUATE.PY
-# Regression metrics + clean visualization
+#Regression metrics
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -32,7 +31,6 @@ def evaluate_model(model_name, model, X_test, y_test):
     # -------------------
     plt.figure(figsize=(6, 5))
     plt.scatter(y_test, y_pred, alpha=0.6)
-    plt.plot([0, 1], [0, 1], 'r--')    # perfect prediction line
     plt.xlabel("Actual (True Values)")
     plt.ylabel("Predicted")
     plt.title(f"{model_name} - Predicted vs Actual")

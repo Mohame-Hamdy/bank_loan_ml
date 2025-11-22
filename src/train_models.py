@@ -1,11 +1,9 @@
-# TRAIN_MODELS.PY
-# Custom implementations of Linear Regression and KNN Regressor
-
+# implementation of linear regression and knn as regressors
 import numpy as np
 from .config import MODELS
 
 # ----------------------------------------
-# Custom Linear Regression using Normal Equation
+# Linear Regression using Normal Equation
 # y = Xw
 # w = (XᵀX)⁻¹ Xᵀ y
 # ----------------------------------------
@@ -25,7 +23,7 @@ class CustomLinearRegression:
 
 
 # ----------------------------------------
-# Custom KNN Regressor
+# KNN Regressor
 # For each sample:
 #   Find k nearest neighbors (euclidean)
 #   Average their target values

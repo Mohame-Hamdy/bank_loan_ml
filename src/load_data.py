@@ -1,4 +1,4 @@
-# LOAD_DATA.PY
+
 # Loads CSV into pandas DataFrame
 
 import pandas as pd

@@ -1,4 +1,4 @@
-# CONFIG.PY
+
 # Contains global configuration values
 
 DATA_PATH = "D:/bank_loan_ml/data/bankloan.csv"   # <-- change this if file name differs
