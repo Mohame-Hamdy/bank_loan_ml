@@ -1,11 +1,20 @@
 
 # Contains global configuration values
 
-DATA_PATH = "D:/bank_loan_ml/data/bankloan.csv"   # <-- change this if file name differs
-TARGET = "Personal.Loan"      # numeric 0/1 target
+DATA_PATH = "D:/bank_loan_ml/data/bankloan.csv"   
+# Configuration constants
+CLASS_TARGET = "Personal.Loan"   # binary target for classification (0/1)
+REG_TARGET = "Income"            # continuous target for regression
 
-TEST_SIZE = 0.2               # 80/20 split
-RANDOM_STATE = 42             # reproducibility
+DROP_COLUMNS = ["ID", "ZIP.Code"]
 
-# Models we want to train
-MODELS = ["linear", "knn"]
+TEST_SIZE = 0.2
+RANDOM_STATE = 42
+
+# KNN hyperparameter for regression and for KNN probability in classification
+K_FOR_KNN = 5
+
+
+
+K_FOR_KNN = 5       # default k for KNN regressor
+THRESHOLD = 0.5  
