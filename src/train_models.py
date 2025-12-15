@@ -1,4 +1,3 @@
-# implementation of linear regression and knn as regressors
 import numpy as np
 from .config import K_FOR_KNN
 import numpy as np
@@ -20,9 +19,7 @@ class LinearRegression:
         self.coef_ = None
 
     def fit(self, X, y):
-        # Add bias column
         Xb = np.c_[np.ones((X.shape[0], 1)), X]  # shape (n, d+1)
-        # normal equation with pseudo-inverse
         XtX = Xb.T @ Xb
         self.coef_ = np.linalg.pinv(XtX) @ Xb.T @ y
 
@@ -47,7 +44,6 @@ class KNNRegressor:
         self.y_train = np.array(y)
 
     def _distances(self, x):
-        # vectorized Euclidean distances between x and all X_train
         return np.linalg.norm(self.X_train - x, axis=1)
 
     def predict(self, X):

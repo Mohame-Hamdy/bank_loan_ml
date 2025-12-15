@@ -10,23 +10,19 @@ def main():
     df = load_dataset(data_path)
     print("Dataset shape:", df.shape)
 
-    # Classification (Personal.Loan) using regressors + threshold
     Xc_train, Xc_test, yc_train, yc_test, scaler_c, feats_c = prepare_classification(df)
     print("Classification features:", feats_c)
 
-    # linear regressor used for classification (thresholded)
     lin_clf = LinearRegression()
     lin_clf.fit(Xc_train, yc_train)
     print("Evaluating Linear (as classifier by threshold)...")
     evaluate_classification_from_regressor("LinearReg (thresholded)", lin_clf, Xc_test, yc_test, threshold=THRESHOLD)
 
-    # KNN regressor used for classification (thresholded)
     knn_clf = KNNRegressor(k=K_FOR_KNN)
     knn_clf.fit(Xc_train, yc_train)
     print("Evaluating KNN (as classifier by threshold)...")
     evaluate_classification_from_regressor("KNNReg (thresholded)", knn_clf, Xc_test, yc_test, threshold=THRESHOLD)
 
-    # Regression (Income)
     Xr_train, Xr_test, yr_train, yr_test, scaler_r, feats_r = prepare_regression(df)
     print("Regression features:", feats_r)
 

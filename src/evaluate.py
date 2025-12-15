@@ -8,17 +8,14 @@ from sklearn.metrics import (
 from .config import THRESHOLD
 
 
-# Classification evaluation (using regressors + threshold)
 def evaluate_classification_from_regressor(model_name, model, X_test, y_test, threshold=THRESHOLD, show_plots=True):
     """
     model: regressor instance with predict(X) -> continuous score (0..1 or any)
     threshold: decision threshold to convert continuous score to class label
     """
-    scores = model.predict(X_test)  # continuous outputs
-    # ensure in numpy
+    scores = model.predict(X_test)  
     scores = np.array(scores)
 
-    # predicted classes by threshold
     preds = (scores >= threshold).astype(int)
 
     acc = accuracy_score(y_test, preds)
@@ -26,13 +23,11 @@ def evaluate_classification_from_regressor(model_name, model, X_test, y_test, th
     rec = recall_score(y_test, preds, zero_division=0)
     f1 = f1_score(y_test, preds, zero_division=0)
     cm = confusion_matrix(y_test, preds)
-    # AUC: requires scores; handle single-class case
     try:
         auc_score = roc_auc_score(y_test, scores)
     except Exception:
         auc_score = float("nan")
 
-    # Print summary
     print(f"\n===== {model_name} (Classification via regressor + threshold={threshold}) =====")
     print(f"Accuracy : {acc:.4f}")
     print(f"Precision: {prec:.4f}")
@@ -43,13 +38,11 @@ def evaluate_classification_from_regressor(model_name, model, X_test, y_test, th
     print(cm)
 
     if show_plots:
-        # Confusion matrix heatmap
         plt.figure(figsize=(4,4))
         plt.imshow(cm, cmap="Blues", interpolation="nearest")
         plt.title(f"{model_name} - Confusion Matrix")
         plt.colorbar()
 
-        # Add numeric values + quadrant labels
         labels = [["TN", "FP"],
                 ["FN", "TP"]]
 
@@ -67,7 +60,6 @@ def evaluate_classification_from_regressor(model_name, model, X_test, y_test, th
         plt.show()
 
 
-        # ROC curve (if valid)
         try:
             fpr, tpr, _ = roc_curve(y_test, scores)
             auc_sc = roc_auc_score(y_test, scores)
@@ -81,7 +73,6 @@ def evaluate_classification_from_regressor(model_name, model, X_test, y_test, th
             plt.grid(True)
             plt.show()
         except Exception:
-            # ROC could fail if only one class present in y_test
             pass
 
     return {
@@ -90,7 +81,6 @@ def evaluate_classification_from_regressor(model_name, model, X_test, y_test, th
     }
 
 
-# Regression evaluation
 def evaluate_regression(model_name, model, X_test, y_test, show_plots=True):
     preds = model.predict(X_test)
     preds = np.array(preds)
@@ -107,7 +97,6 @@ def evaluate_regression(model_name, model, X_test, y_test, show_plots=True):
     print(f"R²   : {r2:.4f}")
 
     if show_plots:
-        # Predicted vs Actual
         plt.figure(figsize=(6,5))
         plt.scatter(y_test, preds, alpha=0.6)
         min_val = min(y_test.min(), preds.min())

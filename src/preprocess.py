@@ -19,7 +19,7 @@ def fill_numeric_mean(df):
 
 def prepare_classification(df):
     """
-    Prepare features and target for classification task (CLASS_TARGET).
+    Prepare features and target for bank loan approval task.
     Returns: X_train_scaled, X_test_scaled, y_train, y_test, scaler, feature_names
     """
     if CLASS_TARGET not in df.columns:
@@ -35,7 +35,7 @@ def prepare_classification(df):
 
 def prepare_regression(df):
     """
-    Prepare features and target for regression task (REG_TARGET).
+    Prepare features and target for regression task .
     Returns: X_train_scaled, X_test_scaled, y_train, y_test, scaler, feature_names
     """
     if REG_TARGET not in df.columns:
